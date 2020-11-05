@@ -1,0 +1,11 @@
+.grid{
+    display: flex;
+}
+.box{
+    border: 1px solid red;
+    height: 30px;
+    width: 30px;
+}
+.c{
+    
+}
