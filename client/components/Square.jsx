@@ -16,7 +16,6 @@ class Square extends React.Component {
                 recurtion()
             }
         }
-        console.log(key)
         recurtion()
         this.props.click1(key)
     }
