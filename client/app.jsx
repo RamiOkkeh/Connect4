@@ -60,7 +60,7 @@ class App extends React.Component {
             return
         }
 
-        if (this.count === 42) {
+        if (this.count > 40) {
             this.setState({ start: `It's a Tie`, reset: 'reset' });
             this.end = true;
             return
