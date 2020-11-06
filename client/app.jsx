@@ -8,7 +8,6 @@ class App extends React.Component {
             start: 'Connect 4',
             player1: [],
             player2: [],
-            results: '',
             reset: 'hide'
         }
         this.click = this.click.bind(this)
@@ -90,7 +89,6 @@ class App extends React.Component {
             start: 'Connect 4',
             player1: [],
             player2: [],
-            results: '',
             reset: 'hide'
         })
         this.turn = 1
