@@ -21,8 +21,8 @@ class Square extends React.Component {
     }
     render() {
         return (
-            <div className="box" onClick={this.click}>
-                <div className={this.props.state[this.props.key1] ? this.props.state[this.props.key1] : 'box'}></div>
+            <div className={this.props.state[this.props.key1] ? this.props.state[this.props.key1] : 'box'} onClick={this.click}>
+                <div ></div>
             </div>
         )
     }

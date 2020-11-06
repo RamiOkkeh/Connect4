@@ -5,6 +5,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            start: 'Connect 4',
             player1: [],
             player2: [],
             results: '',
@@ -24,24 +25,25 @@ class App extends React.Component {
     click({ x, y }) {
         var playerArr = this.state['player' + this.turn]
         if (this.checker(playerArr, [{ x: x, y: y - 1 }, { x: x, y: y - 2 }, { x: x, y: y - 3 }])) {
-            this.setState({ results: `player${this.turn} has won!`, reset: 'show', [7 * y + x]: 'box3' });
+            this.setState({ start: `player${this.turn} has won!`, reset: 'reset', [7 * y + x]: 'box' + (this.turn + 2) });
             for (var i = 0; i < this.winCon.length; i++) {
-                this.setState({ [7 * this.winCon[i].y + this.winCon[i].x]: 'box3' })
+                this.setState({ [7 * this.winCon[i].y + this.winCon[i].x]: 'box' + (this.turn + 2) })
             }
             this.end = true;
+            return
         }
 
         if (this.checker(playerArr, [{ x: x - 1, y: y }, { x: x - 2, y: y }, { x: x - 3, y: y }]) ||
             this.checker(playerArr, [{ x: x + 1, y: y }, { x: x + 2, y: y }, { x: x + 3, y: y }]) ||
             this.checker(playerArr, [{ x: x + 1, y: y }, { x: x - 1, y: y }, { x: x + 2, y: y }]) ||
             this.checker(playerArr, [{ x: x + 1, y: y }, { x: x - 1, y: y }, { x: x - 2, y: y }])) {
-            this.setState({ results: `player${this.turn} has won!`, reset: 'show', [7 * y + x]: 'box3' });
+            this.setState({ start: `player${this.turn} has won!`, reset: 'reset', [7 * y + x]: 'box' + (this.turn + 2) });
             for (var i = 0; i < this.winCon.length; i++) {
-                this.setState({ [7 * this.winCon[i].y + this.winCon[i].x]: 'box3' })
+                this.setState({ [7 * this.winCon[i].y + this.winCon[i].x]: 'box' + (this.turn + 2) })
             }
             this.end = true;
+            return
         }
-        console.log(x, y)
 
         if (this.checker(playerArr, [{ x: x - 1, y: y - 1 }, { x: x - 2, y: y - 2 }, { x: x - 3, y: y - 3 }]) ||
             this.checker(playerArr, [{ x: x + 1, y: y + 1 }, { x: x + 2, y: y + 2 }, { x: x + 3, y: y + 3 }]) ||
@@ -51,26 +53,29 @@ class App extends React.Component {
             this.checker(playerArr, [{ x: x + 1, y: y - 1 }, { x: x + 2, y: y - 2 }, { x: x + 3, y: y - 3 }]) ||
             this.checker(playerArr, [{ x: x + 1, y: y - 1 }, { x: x - 1, y: y + 1 }, { x: x - 2, y: y + 2 }]) ||
             this.checker(playerArr, [{ x: x - 1, y: y + 1 }, { x: x + 1, y: y - 1 }, { x: x + 2, y: y - 2 }])) {
-            this.setState({ results: `player${this.turn} has won!`, reset: 'show', [7 * y + x]: 'box3' });
+            this.setState({ start: `player${this.turn} has won!`, reset: 'reset', [7 * y + x]: 'box' + (this.turn + 2) });
             for (var i = 0; i < this.winCon.length; i++) {
-                this.setState({ [7 * this.winCon[i].y + this.winCon[i].x]: 'box3' })
+                this.setState({ [7 * this.winCon[i].y + this.winCon[i].x]: 'box' + (this.turn + 2) })
             }
             this.end = true;
+            return
         }
 
         if (this.count === 42) {
-            this.setState({ results: `It's a Tie`, reset: 'show' });
+            this.setState({ start: `It's a Tie`, reset: 'reset' });
             this.end = true;
+            return
         }
         this.count++
         if (this.turn === 1) this.turn = 2
         else this.turn = 1
-        // console.log(x, y)
+        this.setState({ start: `Player${this.turn}'s turn` })
     }
     click1(key) {
         if (this.end) return;
-        var arr = this.state['player' + this.turn]
         var cords = { x: key % 7, y: Math.floor(key / 7) }
+        if (cords.y > 5) return;
+        var arr = this.state['player' + this.turn]
         arr.push(cords)
         this.setState({
             [key]: 'box' + this.turn,
@@ -82,6 +87,7 @@ class App extends React.Component {
     reset() {
         this.state = {}
         this.setState({
+            start: 'Connect 4',
             player1: [],
             player2: [],
             results: '',
@@ -93,7 +99,7 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div className="grid">
+            <div className="center">
                 {/* <div className="c" id="1" onClick={this.click}>
                     <Square turn={this.turn} cs={this.state.cs1} y={1} />
                     <Square turn={this.turn} cs={this.state.cs1} y={2} />
@@ -150,9 +156,11 @@ class App extends React.Component {
                     <Square turn={this.turn} cs={this.state.cs7} y={5} />
                     <Square turn={this.turn} cs={this.state.cs7} y={6} />
                 </div> */}
-                {_.range(41, -1).map((elem, i) => <Square key={elem} key1={elem} state={this.state} click1={this.click1} turn={this.turn} />)}
-                <div id="results">{this.state.results}</div>
-                <button className={this.state.reset} onClick={this.reset}>Play Again!</button>
+                <h2 className="head">{this.state.start}</h2>
+                <div className="grid">
+                    {_.range(41, -1).map((elem, i) => <Square key={elem} key1={elem} state={this.state} click1={this.click1} turn={this.turn} />)}
+                </div>
+                <input type="button" className={this.state.reset} onClick={this.reset} value="Play Again?" />
             </div>
         )
     }
