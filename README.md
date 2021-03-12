@@ -23,7 +23,7 @@ Connect-Four is a tic-tac-toe-like two-player game in which players alternately 
 ## Technologies
 
 - React used to create interface and game loop.
-- Express server used to staticly serve the page
+- Express server used to staticly serve the page.
 - Node.js used to maintain JavaScript packages.
 
 ## Key Files
