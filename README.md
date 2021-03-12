@@ -30,7 +30,7 @@ Connect-Four is a tic-tac-toe-like two-player game in which players alternately 
 
 1. [client/app](https://github.com/RamiOkkeh/Connect4/blob/main/client/app.jsx)
    - Creates game interface.
-   - Defines responses for user events
+   - Defines responses for user events.
    - Component state keeps track of game progress.
 2. [client/components/Square](https://github.com/RamiOkkeh/Connect4/blob/main/client/components/Square.jsx)
    - Defines the properties of each square
