@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-let port = 3002;
+let port = 3000;
 
 app.listen(port, () => {
     console.log('Listening on port: ' + port)
