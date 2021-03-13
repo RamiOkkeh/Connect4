@@ -4,7 +4,7 @@ A simple game of Connect 4
 
 <div style="text-align:center">
     <a align="center" href="http://c0nnect-4.herokuapp.com/public/">
-        <img src="header.png" width="500" style="margin-left:100px;" align="center" alt="Connect4-perview"/>
+        <img src="header.png" width="500" alt="Connect4-perview"/>
     </a>
 </div>
 
